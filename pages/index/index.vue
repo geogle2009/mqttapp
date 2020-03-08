@@ -3,7 +3,6 @@
 		<view class="text-area">
 			<text class="title">{{ title }}</text>
 		</view>
-		<view class="example-body">{{ message }}</view>
 		<uni-section title="动态加载" type="line"></uni-section>
 		<view class="example-body">
 			<view v-if="dynamicList.length !== 0" class="grid-dynamic-box">
