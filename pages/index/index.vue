@@ -28,7 +28,7 @@ import { uniBadge, uniGrid, uniSection, uniGridItem } from '@dcloudio/uni-ui';
 var $mqtt = require('@/common/js/mqttws31.js');
 
 var client;
-var host = '192.168.3.117';
+var host = '47.104.177.95';
 var port = 61614;
 var timestamp3 = new Date().getTime();
 var clientId = 'sampleid' + timestamp3;
@@ -52,6 +52,12 @@ var options = {
 	onSuccess: function onConnect() {
 		//连接成功
 		console.log(new Date() + ': ' + '连接成功');
+		
+		uni.showToast({
+			duration:1000,
+			title:'连接成功'+ host
+		})
+		
 		// Connection succeeded; subscribe to our topic
 		//订阅消息
 		mqtt.subscribe(topic, {
@@ -68,11 +74,20 @@ var options = {
 	onFailure: function(message) {
 		//连接失败
 		console.log(new Date() + ': ' + '连接失败' + JSON.stringify(message));
+		uni.showToast({
+			duration:1500,
+			title:'连接失败'+ host
+		})
 		//连接失败,重新连接
 	}
 };
 mqtt.onConnectionLost = function onConnectionLost(response) {
 	console.log(new Date() + ': ' + '连接中断' + JSON.stringify(response));
+	
+	uni.showToast({
+		duration:1500,
+		title:'连接失败,重新连接'+ host
+	})
 	//连接失败,重新连接
 };
 mqtt.onMessageArrived = function onMessageArrived(message) {
